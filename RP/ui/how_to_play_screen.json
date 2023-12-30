@@ -31,6 +31,16 @@
 							"category_1@how_to_play_common.topic_category": {
 								"$category": "Scoreboards! by YetNT"
 							}
+						},
+						{
+							"section_0_button@how_to_play.section_0_button": {
+								"$toggle_group_forced_index": 0
+							}
+						},
+						{
+							"section_1_button@how_to_play.section_1_button": {
+								"$toggle_group_forced_index": 1
+							}
 						}
 					]
 				}
@@ -56,8 +66,250 @@
 					"controls": [
 						{
 							"section_contents_header@how_to_play_common.section_contents_header": {}
+						},
+						{
+							"section_0@how_to_play.section_0": {}
+						},
+						{
+							"section_1@how_to_play.section_1": {}
 						}
 					]
+				}
+			}
+		]
+	},
+	"section_0_button@how_to_play_common.section_toggle_button": {
+		"$section_topic": "Quick Guide"
+	},
+	"section_0@how_to_play_common.main_sections": {
+		"bindings": [
+			{
+				"binding_type": "view",
+				"source_control_name": "Quick Guide_button_toggle",
+				"source_property_name": "#toggle_state",
+				"target_property_name": "#visible"
+			}
+		],
+		"controls": [
+			{
+				"header_0@how_to_play_common.header": {
+					"$text": "Quick Guide "
+				}
+			},
+			{
+				"paragraph_1@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"header_2@how_to_play_common.header": {
+					"$text": "Command Syntax "
+				}
+			},
+			{
+				"paragraph_3@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_4@how_to_play_common.paragraph": {
+					"$text": "& = Arg is not required. ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_5@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_6@how_to_play_common.paragraph": {
+					"$text": "*?new [type] [name] [&Display] [&SortOrder]* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_7@how_to_play_common.paragraph": {
+					"$text": "*?remove [type]* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_8@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_9@how_to_play_common.paragraph": {
+					"$text": "§oDefaults to sidebar and ascending order when not given.§r ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_10@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"header_11@how_to_play_common.header": {
+					"$text": "Simple "
+				}
+			},
+			{
+				"paragraph_12@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_13@how_to_play_common.paragraph": {
+					"$text": "*?new deaths Deaths%Scoreboard* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_14@how_to_play_common.paragraph": {
+					"$text": "*?remove deaths* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_15@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_16@how_to_play_common.paragraph": {
+					"$text": "*?new brokenBlocks Blocks%Broken BelowName* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_17@how_to_play_common.paragraph": {
+					"$text": "*?remove brokenBlocks* ",
+					"$text_alignment": "left"
+				}
+			}
+		]
+	},
+	"section_1_button@how_to_play_common.section_toggle_button": {
+		"$section_topic": "Types"
+	},
+	"section_1@how_to_play_common.main_sections": {
+		"bindings": [
+			{
+				"binding_type": "view",
+				"source_control_name": "Types_button_toggle",
+				"source_property_name": "#toggle_state",
+				"target_property_name": "#visible"
+			}
+		],
+		"controls": [
+			{
+				"header_18@how_to_play_common.header": {
+					"$text": "Scoreboard Types "
+				}
+			},
+			{
+				"paragraph_19@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_20@how_to_play_common.paragraph": {
+					"$text": "Currently supports 2 types. ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_21@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_22@how_to_play_common.paragraph": {
+					"$text": "## deaths ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_23@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_24@how_to_play_common.paragraph": {
+					"$text": "Records player deaths ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_25@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_26@how_to_play_common.paragraph": {
+					"$text": "*?new deaths Deaths Sidebar* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_27@how_to_play_common.paragraph": {
+					"$text": "*?remove deaths* ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_28@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_29@how_to_play_common.paragraph": {
+					"$text": "## brokenBlocks ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_30@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_31@how_to_play_common.paragraph": {
+					"$text": "Amount of blocks broken ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_32@how_to_play_common.paragraph": {
+					"$text": " ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_33@how_to_play_common.paragraph": {
+					"$text": "*?new brokenBlocks Blocks%Broken Sidebar* _% gets replaced with a space ",
+					"$text_alignment": "left"
+				}
+			},
+			{
+				"paragraph_34@how_to_play_common.paragraph": {
+					"$text": "_ ",
+					"$text_alignment": "left"
 				}
 			}
 		]

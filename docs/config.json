@@ -3,8 +3,8 @@
         {
             "title": "Scoreboards! by YetNT",
             "pages": [
-                "sb/quick.md",
-                "sb/types.md"
+                "sb/quick",
+                "sb/types"
             ]
         }
     ]

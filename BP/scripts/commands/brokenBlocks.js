@@ -31,7 +31,7 @@ export function add(name, display = DisplaySlotId.Sidebar, sortOrder = Objective
             console.error("Could not get playerIdentity. Has this player been added to the scoreboard?")
             console.error("Error was sent to the user")
             player.sendMessage("Could not get playerIdentity. Has this player been added to the scoreboard?")
-            continue;
+            return;
         }
 
         // initialize player score to 100;

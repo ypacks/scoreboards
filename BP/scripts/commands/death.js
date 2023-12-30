@@ -1,7 +1,7 @@
 // ?newscoreboard deaths (NAME) (DisplaySlotId) (SortOrder)
 // ?removescoreboard deaths
 
-import { world, ObjectiveSortOrder, DisplaySlotId } from '@minecraft/server';
+import { world, ObjectiveSortOrder, DisplaySlotId, system } from '@minecraft/server';
 
 const objectiveId = "deaths"
 

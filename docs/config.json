@@ -1,17 +1,10 @@
 {
     "categories": [
         {
-            "title": "Information",
+            "title": "Scoreboards! by YetNT",
             "pages": [
-                "information/intro"
-            ]
-        },
-        {
-            "title": "Guides",
-            "pages": [
-                "guides/text",
-                "guides/images",
-                "guides/emoji"
+                "sb/quick.md",
+                "sb/types.md"
             ]
         }
     ]

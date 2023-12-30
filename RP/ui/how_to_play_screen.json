@@ -1,0 +1,65 @@
+{
+	"namespace": "how_to_play",
+	"how_to_play_screen@how_to_play_common.screen_base": {
+		"$selector_stack_panel": "how_to_play.selector_stack_panel",
+		"$section_content_panels": "how_to_play.section_content_panels",
+		"$header_safezone_control": "common_store.store_top_bar_filler",
+		"$header_bar_control": "common_store.store_top_bar",
+		"$is_full_screen_layout": true
+	},
+	"selector_stack_panel": {
+		"type": "stack_panel",
+		"anchor_from": "top_left",
+		"anchor_to": "top_left",
+		"orientation": "vertical",
+		"$default_selector_toggle_index": 0,
+		"controls": [
+			{
+				"how_to_play_selector_pane": {
+					"type": "stack_panel",
+					"controls": [
+						{
+							"padding_0": {
+								"type": "panel",
+								"size": [
+									0,
+									6
+								]
+							}
+						},
+						{
+							"category_1@how_to_play_common.topic_category": {
+								"$category": "Scoreboards! by YetNT"
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+	"section_content_panels": {
+		"type": "stack_panel",
+		"anchor_from": "top_left",
+		"anchor_to": "top_left",
+		"size": [
+			"100% - 5px",
+			"100%c + 5px"
+		],
+		"offset": [
+			2,
+			0
+		],
+		"controls": [
+			{
+				"general_tips_sections": {
+					"type": "stack_panel",
+					"controls": [
+						{
+							"section_contents_header@how_to_play_common.section_contents_header": {}
+						}
+					]
+				}
+			}
+		]
+	}
+}

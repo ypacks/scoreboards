@@ -58,8 +58,9 @@ export function add(name, display = DisplaySlotId.Sidebar, sortOrder = Objective
 }
 
 export function remove() {
-    world.afterEvents.entityDie.unsubscribe()
-
+    system.run(() => {
+        world.afterEvents.entityDie.unsubscribe()
+    })
     let objective = world.scoreboard.getObjective(objectiveId);
 
     if (!objective) return

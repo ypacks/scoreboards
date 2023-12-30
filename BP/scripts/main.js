@@ -3,8 +3,9 @@ import commands from "./commands/index.js"
 const prefix = "?"
 const types = {
     deaths: "deaths",
-    kills: "kills"
+    brokenBlocks: "brokenBlocks"
 }
+import { Error } from "./error.js"
 const sortOrderValues = Object.values(ObjectiveSortOrder)
 const displaySlotIds = Object.values(DisplaySlotId)
 
@@ -20,22 +21,22 @@ world.beforeEvents.chatSend.subscribe((eventData) => {
      */
     const args = command.split(" ")
 
-    if (args.length < 2) return // not enough args. Handle error.
+    if (args.length < 2) { new Error(player, "Too little arguments were given. {E1}"); return } // not enough args. Handle error.
 
-    if (!Object.values(types).includes(args[1])) return // invalid type. Handle error here
+    if (!Object.values(types).includes(args[1])) { new Error(player, "Invalid Scoreboard type was given. {E2}"); return } // invalid type. Handle error here
 
     switch (args[0]) {
         case "newscoreboard":
         case "new":
         case "add":
-            if (args.length < 3) return // too long or short args [length 4 has the displayslotid, length 5 has display slotid and sortorder]. Handle error
+            if (args.length < 3) { new Error(player, "Too little arguments were given. {E1}"); return } // too long or short args [length 4 has the displayslotid, length 5 has display slotid and sortorder]. Handle error
             let name = args[2]
             // If args were not given
             let displaySlotId = args[3] ?? DisplaySlotId.Sidebar
             let sortOrder = args[4] ?? ObjectiveSortOrder.Descending
             // if they were given, check if valid.
-            if (!sortOrderValues.includes(sortOrder)) return // sortOrder is not valid. Handle error
-            if (!displaySlotIds.includes(displaySlotId)) return // displaySlotId is not vaslid. Handle error
+            if (!sortOrderValues.includes(sortOrder)) { new Error(player, "Invalid Sort Order was given. {E2}"); return } // sortOrder is not valid. Handle error
+            if (!displaySlotIds.includes(displaySlotId)) { new Error(player, "Invalid Display Slot ID was given. {E2}"); return } // displaySlotId is not vaslid. Handle error
 
             commands[args[1]].add(name, displaySlotId, sortOrder)
             break;

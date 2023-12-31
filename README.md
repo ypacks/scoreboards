@@ -1,6 +1,7 @@
 # Scoreboards!
 
 > [!NOTE]
+> **In order for this addon to work, you need to go into `Experimental Gameplay` and enable `Bea APIs`**
 > You need to be operator to run these commands.
 
 ## Installation

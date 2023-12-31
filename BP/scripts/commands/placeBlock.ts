@@ -3,15 +3,15 @@
 
 import { world, ObjectiveSortOrder, DisplaySlotId, system, Player, PlayerBreakBlockAfterEvent } from '@minecraft/server';
 import { removePlayerOffline, msg } from "../util"
-const objectiveId = "bb"
-const nameType = "Blocks broken"
+const objectiveId = "pb"
+const nameType = "Blocks placed"
 let event: (arg: PlayerBreakBlockAfterEvent) => void;
 /**
  * @param {string} name
  */
 export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, playerCommand: Player) {
     system.run(() => {
-        event = world.afterEvents.playerBreakBlock.subscribe((event) => {
+        event = world.afterEvents.playerPlaceBlock.subscribe((event) => {
             const player = event.player
 
             const scoreboardObjectiveId = objectiveId;
@@ -47,7 +47,7 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
 
 export function remove(player: Player) {
     system.run(() => {
-        world.afterEvents.playerBreakBlock.unsubscribe(event)
+        world.afterEvents.playerPlaceBlock.unsubscribe(event)
 
         player.sendMessage(msg.remove(nameType))
         let objective = world.scoreboard.getObjective(objectiveId);

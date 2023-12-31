@@ -61,3 +61,24 @@ export const input = {
         }
     }
 }
+
+/**
+ * Object for messages to show to player.
+ */
+export const msg = {
+    /**
+     * When succesfully adding a scoreboard
+     */
+    add(name: string): string {
+        const colour1 = "§3"
+        const colour2 = "§e§o"
+        return `${colour1}${name} scoreboard has been added. ${colour2} Players who join after, may need to wait a bit before their scores show.`
+    },
+    /**
+     * When succesfully removing a scoreboard
+     */
+    remove(name: string): string {
+        const colour1 = "§5"
+        return `${colour1}${name} scoreboard was removed.`
+    }
+}

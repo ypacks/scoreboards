@@ -2,8 +2,9 @@
 // ?removescoreboard deaths
 
 import { world, ObjectiveSortOrder, DisplaySlotId, system, Player, EntityDieAfterEvent } from '@minecraft/server';
-import { removePlayerOffline } from "../util"
+import { removePlayerOffline, msg } from "../util"
 const objectiveId = "deaths"
+const nameType = "Deaths"
 let event: (arg: EntityDieAfterEvent) => void;
 
 export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, playerCommand: Player) {
@@ -48,13 +49,13 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
         })
     })
 
-    playerCommand.sendMessage("§3Deaths scoreboard has been added. §e§oPlayers who joined after the scoreboard was added will need to be added manually")
+    playerCommand.sendMessage(msg.add(nameType))
 }
 
 export function remove(player: Player) {
     system.run(() => {
         world.afterEvents.entityDie.unsubscribe(event)
-        player.sendMessage(`Deaths scoreboard was removed`)
+        player.sendMessage(msg.remove(nameType))
         let objective = world.scoreboard.getObjective(objectiveId);
 
         if (!objective) return

@@ -4,25 +4,24 @@ const prefix = "?"
 
 const types = {
     deaths: "deaths",
-    brokenBlocks: "bb"
+    brokenBlocks: "bb",
+    placeBlock: "pb"
 }
 import { input } from "./util"
 import { Error } from "./error"
-const sortOrderValues = Object.values(ObjectiveSortOrder)
-const displaySlotIds = Object.values(DisplaySlotId)
 
 // ?newscoreboard (TYPE) [Name] [DisplaySlotId] [SortOrder]
 // ?removescoreboard (TYPE)
 
 world.beforeEvents.chatSend.subscribe((eventData) => {
     const player = eventData.sender;
-    if (!player.isOp()) { new Error(player, `You {${player.name}} are not an OP. {E3}`); return }
+    if (!player.isOp() && eventData.message[0] === prefix) { new Error(player, `You {${player.name}} are not an OP. {E3}`); return }
     if (eventData.message[0] !== prefix) return;
     const command = eventData.message.slice(1) // removes ?
     //@ts-ignore
     const args: [
-        ("newscoreboard" | "new" | "add"), ("deaths" | "bb"), string, (DisplaySlotId | string), string /* <-- this is objectiveSortOrder.*/
-    ] | [("remove" | "removescoreboard"), ("deaths" | "bb")] = command.split(" ")
+        ("newscoreboard" | "new" | "add"), ("deaths" | "bb" | "pb"), string, (DisplaySlotId | string), string /* <-- this is objectiveSortOrder.*/
+    ] | [("remove" | "removescoreboard"), ("deaths" | "bb" | "pb")] = command.split(" ")
 
     if (args.length < 2) { new Error(player, "Too little arguments were given. {E1}"); return } // not enough args. Handle error.
 
@@ -41,7 +40,7 @@ world.beforeEvents.chatSend.subscribe((eventData) => {
             if (!sortOrder) { new Error(player, "Invalid Sort Order was given. {E2}"); return } // sortOrder is not valid. Handle error
             if (!displaySlotId) { new Error(player, "Invalid Display Slot ID was given. {E2}"); return } // displaySlotId is not vaslid. Handle error
 
-            commands[args[1]].add(name, displaySlotId, sortOrder, player)
+            commands[args[1]].add(name.replaceAll("?/", " "), displaySlotId, sortOrder, player)
             break;
         case "remove":
         case "removescoreboard":

@@ -5,10 +5,7 @@ import { world, ObjectiveSortOrder, DisplaySlotId, system } from '@minecraft/ser
 
 const objectiveId = "deaths"
 
-/**
- * @param {string} name
- */
-export function add(name, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending) {
+export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending) {
     system.run(() => {
         world.afterEvents.entityDie.subscribe((event) => {
             if (!event.deadEntity.isValid()) return;
@@ -28,7 +25,6 @@ export function add(name, display = DisplaySlotId.Sidebar, sortOrder = Objective
             // get the scoreboard identity for player 0
             for (const player of players) {
                 if (player.nameTag !== event.deadEntity.nameTag) {
-                    world.sendMessage()
                     continue
                 };
                 let playerIdentity = player.scoreboardIdentity;
@@ -59,7 +55,7 @@ export function add(name, display = DisplaySlotId.Sidebar, sortOrder = Objective
 
 export function remove() {
     system.run(() => {
-        world.afterEvents.entityDie.unsubscribe()
+        world.afterEvents.entityDie.unsubscribe(() => { })
     })
     let objective = world.scoreboard.getObjective(objectiveId);
 

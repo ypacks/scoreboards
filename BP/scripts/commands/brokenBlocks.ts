@@ -1,16 +1,14 @@
-// ?newscoreboard brokenBlocks (NAME) (DisplaySlotId) (SortOrder)
-// ?removescoreboard brokenBlocks
+// ?newscoreboard bb (NAME) (DisplaySlotId) (SortOrder)
+// ?removescoreboard bb
 
 import { world, ObjectiveSortOrder, DisplaySlotId, system } from '@minecraft/server';
 
-const objectiveId = "brokenBlocks"
-
-world.afterEvents.playerBreakBlock
+const objectiveId = "bb"
 
 /**
  * @param {string} name
  */
-export function add(name, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending) {
+export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending) {
     system.run(() => {
         world.afterEvents.playerBreakBlock.subscribe((event) => {
             const player = event.player
@@ -53,7 +51,7 @@ export function add(name, display = DisplaySlotId.Sidebar, sortOrder = Objective
 
 export function remove() {
     system.run(() => {
-        world.afterEvents.playerBreakBlock.unsubscribe()
+        world.afterEvents.playerBreakBlock.unsubscribe(() => { })
     })
     let objective = world.scoreboard.getObjective(objectiveId);
 

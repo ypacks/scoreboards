@@ -1,11 +1,12 @@
 import { world, ObjectiveSortOrder, DisplaySlotId } from '@minecraft/server';
-import commands from "./commands/index.js"
+import commands from "./commands/index"
 const prefix = "?"
+
 const types = {
     deaths: "deaths",
-    brokenBlocks: "brokenBlocks"
+    brokenBlocks: "bb"
 }
-import { Error } from "./error.js"
+import { Error } from "./error"
 const sortOrderValues = Object.values(ObjectiveSortOrder)
 const displaySlotIds = Object.values(DisplaySlotId)
 
@@ -16,10 +17,10 @@ world.beforeEvents.chatSend.subscribe((eventData) => {
     const player = eventData.sender;
     if (eventData.message[0] !== prefix) return;
     const command = eventData.message.slice(1) // removes ?
-    /**
-     * @type {[("newscoreboard"|"new"|"add"), ("deaths"|"brokenBlocks"), string, DisplaySlotId, ObjectiveSortOrder]|[("remove"| removescoreboard),("deaths"|"brokenBlocks")]}
-     */
-    const args = command.split(" ")
+    //@ts-ignore
+    const args: [
+        ("newscoreboard" | "new" | "add"), ("deaths" | "bb"), string, DisplaySlotId, ObjectiveSortOrder
+    ] | [("remove" | "removescoreboard"), ("deaths" | "bb")] = command.split(" ")
 
     if (args.length < 2) { new Error(player, "Too little arguments were given. {E1}"); return } // not enough args. Handle error.
 

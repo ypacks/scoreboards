@@ -1,9 +1,9 @@
 import * as deaths from "./death"
-import * as brokenBlocks from "./brokenBlocks"
+import * as bb from "./brokenBlocks"
 
 
 const commands = {
-    deaths, brokenBlocks
+    deaths, bb
 }
 
 export default commands

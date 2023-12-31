@@ -23,10 +23,10 @@ ObjectiveSortOrder.Descending
 */
 
 export const input = {
-    fixDisplay(input: string): DisplaySlotId | false {
+    fixDisplay(input: string): DisplaySlotId | undefined {
         let allowed = ["belowname", "belowName", "BelowName", "list", "List", "sidebar", "Sidebar", "sideBar", "SideBar"]
 
-        if (!allowed.includes(input)) return false
+        if (!allowed.includes(input)) return undefined
 
         switch (input) {
             case "belowname":
@@ -43,10 +43,10 @@ export const input = {
                 return DisplaySlotId.Sidebar
         }
     },
-    fixSortOrder(input: string): ObjectiveSortOrder | false {
+    fixSortOrder(input: string): ObjectiveSortOrder | undefined {
         let allowed = ["asc", "des", "ascending", "descending", "desc", "Ascending", "Descending"]
 
-        if (!allowed.includes(input)) return false
+        if (!allowed.includes(input)) return undefined
 
         switch (input) {
             case "asc":

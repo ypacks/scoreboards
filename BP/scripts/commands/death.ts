@@ -1,13 +1,16 @@
 // ?newscoreboard deaths (NAME) (DisplaySlotId) (SortOrder)
 // ?removescoreboard deaths
 
-import { world, ObjectiveSortOrder, DisplaySlotId, system } from '@minecraft/server';
+import { world, ObjectiveSortOrder, DisplaySlotId, system, Player } from '@minecraft/server';
 
 const objectiveId = "deaths"
+let enabled = true
 
-export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending) {
+export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, player: Player) {
+    enabled = true
     system.run(() => {
         world.afterEvents.entityDie.subscribe((event) => {
+            if (!enabled) return;
             if (!event.deadEntity.isValid()) return;
 
             const scoreboardObjectiveId = objectiveId;
@@ -51,16 +54,20 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
             }
         })
     })
+
+    player.sendMessage("§3Deaths scoreboard has been added. §e§oPlayers who joined after the scoreboard was added will need to be added manually")
 }
 
-export function remove() {
+export function remove(player: Player) {
     system.run(() => {
         world.afterEvents.entityDie.unsubscribe(() => {
-            let objective = world.scoreboard.getObjective(objectiveId);
-
-            if (!objective) return
-
-            world.scoreboard.removeObjective(objective)
+            player.sendMessage(`Deaths scoreboard was removed`)
         })
+        let objective = world.scoreboard.getObjective(objectiveId);
+
+        if (!objective) return
+
+        world.scoreboard.removeObjective(objective)
+        enabled = false
     })
 }

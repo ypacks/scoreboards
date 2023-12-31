@@ -1,19 +1,16 @@
 // ?newscoreboard bb (NAME) (DisplaySlotId) (SortOrder)
 // ?removescoreboard bb
 
-import { world, ObjectiveSortOrder, DisplaySlotId, system, Player } from '@minecraft/server';
+import { world, ObjectiveSortOrder, DisplaySlotId, system, Player, PlayerBreakBlockAfterEvent } from '@minecraft/server';
 
 const objectiveId = "bb"
-let enabled = true
-
+let event: (arg: PlayerBreakBlockAfterEvent) => void;
 /**
  * @param {string} name
  */
 export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, player: Player) {
-    enabled = true
     system.run(() => {
-        world.afterEvents.playerBreakBlock.subscribe((event) => {
-            if (!enabled) return;
+        event = world.afterEvents.playerBreakBlock.subscribe((event) => {
             const player = event.player
 
             const scoreboardObjectiveId = objectiveId;
@@ -55,15 +52,13 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
 
 export function remove(player: Player) {
     system.run(() => {
-        world.afterEvents.playerBreakBlock.unsubscribe(() => {
-            player.sendMessage(`Blocks broken scoreboard was removed`)
-        })
+        world.afterEvents.playerBreakBlock.unsubscribe(event)
 
+        player.sendMessage(`Blocks broken scoreboard was removed`)
         let objective = world.scoreboard.getObjective(objectiveId);
 
         if (!objective) return
 
         world.scoreboard.removeObjective(objective)
-        enabled = false
     })
 }

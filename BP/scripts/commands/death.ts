@@ -1,16 +1,14 @@
 // ?newscoreboard deaths (NAME) (DisplaySlotId) (SortOrder)
 // ?removescoreboard deaths
 
-import { world, ObjectiveSortOrder, DisplaySlotId, system, Player } from '@minecraft/server';
+import { world, ObjectiveSortOrder, DisplaySlotId, system, Player, EntityDieAfterEvent } from '@minecraft/server';
 
 const objectiveId = "deaths"
-let enabled = true
+let event: (arg: EntityDieAfterEvent) => void;
 
 export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, player: Player) {
-    enabled = true
     system.run(() => {
-        world.afterEvents.entityDie.subscribe((event) => {
-            if (!enabled) return;
+        event = world.afterEvents.entityDie.subscribe((event) => {
             if (!event.deadEntity.isValid()) return;
 
             const scoreboardObjectiveId = objectiveId;
@@ -60,14 +58,12 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
 
 export function remove(player: Player) {
     system.run(() => {
-        world.afterEvents.entityDie.unsubscribe(() => {
-            player.sendMessage(`Deaths scoreboard was removed`)
-        })
+        world.afterEvents.entityDie.unsubscribe(event)
+        player.sendMessage(`Deaths scoreboard was removed`)
         let objective = world.scoreboard.getObjective(objectiveId);
 
         if (!objective) return
 
         world.scoreboard.removeObjective(objective)
-        enabled = false
     })
 }

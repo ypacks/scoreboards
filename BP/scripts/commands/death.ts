@@ -55,11 +55,12 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
 
 export function remove() {
     system.run(() => {
-        world.afterEvents.entityDie.unsubscribe(() => { })
-        let objective = world.scoreboard.getObjective(objectiveId);
+        world.afterEvents.entityDie.unsubscribe(() => {
+            let objective = world.scoreboard.getObjective(objectiveId);
 
-        if (!objective) return
+            if (!objective) return
 
-        world.scoreboard.removeObjective(objective)
+            world.scoreboard.removeObjective(objective)
+        })
     })
 }

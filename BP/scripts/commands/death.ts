@@ -2,11 +2,11 @@
 // ?removescoreboard deaths
 
 import { world, ObjectiveSortOrder, DisplaySlotId, system, Player, EntityDieAfterEvent } from '@minecraft/server';
-
+import { removePlayerOffline } from "../util"
 const objectiveId = "deaths"
 let event: (arg: EntityDieAfterEvent) => void;
 
-export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, player: Player) {
+export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = ObjectiveSortOrder.Descending, playerCommand: Player) {
     system.run(() => {
         event = world.afterEvents.entityDie.subscribe((event) => {
             if (!event.deadEntity.isValid()) return;
@@ -16,14 +16,14 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
 
             let players = world.getPlayers();
 
-            // Ensure a new objective.
             let objective = world.scoreboard.getObjective(scoreboardObjectiveId);
 
             if (!objective) {
                 objective = world.scoreboard.addObjective(scoreboardObjectiveId, scoreboardObjectiveDisplayName);
             }
 
-            // get the scoreboard identity for player 0
+            removePlayerOffline(objective)
+
             for (const player of players) {
                 if (player.nameTag !== event.deadEntity.nameTag) {
                     continue
@@ -31,14 +31,10 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
                 let playerIdentity = player.scoreboardIdentity;
 
                 if (playerIdentity === undefined) {
-                    console.log("Could not get playerIdentity. Has this player been added to the scoreboard?")
-                    world.sendMessage(`${player.name} was not added to the ${objectiveId} scoreboard, their death was not recorded.`)
+                    console.log(`Could not get playerIdentity. Attempting to run command to add player as ${playerCommand.name}`)
+                    playerCommand.runCommand(`scoreboard players add ${player.name} ${objectiveId} 1`)
                     continue;
                 }
-
-                // initialize player score to 100;
-                // objective.setScore(playerIdentity, 100);
-                //
 
                 world.scoreboard.setObjectiveAtDisplaySlot(display, {
                     objective: objective,
@@ -47,13 +43,12 @@ export function add(name: string, display = DisplaySlotId.Sidebar, sortOrder = O
 
                 const playerScore = objective.getScore(playerIdentity) ?? 0;
 
-                // score should now be 110.
                 objective.setScore(playerIdentity, playerScore + 1);
             }
         })
     })
 
-    player.sendMessage("§3Deaths scoreboard has been added. §e§oPlayers who joined after the scoreboard was added will need to be added manually")
+    playerCommand.sendMessage("§3Deaths scoreboard has been added. §e§oPlayers who joined after the scoreboard was added will need to be added manually")
 }
 
 export function remove(player: Player) {

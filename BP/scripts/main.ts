@@ -6,6 +6,7 @@ const types = {
     deaths: "deaths",
     brokenBlocks: "bb"
 }
+import { input } from "./util"
 import { Error } from "./error"
 const sortOrderValues = Object.values(ObjectiveSortOrder)
 const displaySlotIds = Object.values(DisplaySlotId)
@@ -20,7 +21,7 @@ world.beforeEvents.chatSend.subscribe((eventData) => {
     const command = eventData.message.slice(1) // removes ?
     //@ts-ignore
     const args: [
-        ("newscoreboard" | "new" | "add"), ("deaths" | "bb"), string, DisplaySlotId, ObjectiveSortOrder
+        ("newscoreboard" | "new" | "add"), ("deaths" | "bb"), string, (DisplaySlotId | string), string /* <-- this is objectiveSortOrder.*/
     ] | [("remove" | "removescoreboard"), ("deaths" | "bb")] = command.split(" ")
 
     if (args.length < 2) { new Error(player, "Too little arguments were given. {E1}"); return } // not enough args. Handle error.
@@ -34,11 +35,11 @@ world.beforeEvents.chatSend.subscribe((eventData) => {
             if (args.length < 3) { new Error(player, "Too little arguments were given. {E1}"); return } // too long or short args [length 4 has the displayslotid, length 5 has display slotid and sortorder]. Handle error
             let name = args[2]
             // If args were not given
-            let displaySlotId = args[3] ?? DisplaySlotId.Sidebar
-            let sortOrder = args[4] ?? ObjectiveSortOrder.Descending
+            let displaySlotId = input.fixDisplay(args[3]) ?? DisplaySlotId.Sidebar
+            let sortOrder = input.fixSortOrder(args[4]) ?? ObjectiveSortOrder.Descending
             // if they were given, check if valid.
-            if (!sortOrderValues.includes(sortOrder)) { new Error(player, "Invalid Sort Order was given. {E2}"); return } // sortOrder is not valid. Handle error
-            if (!displaySlotIds.includes(displaySlotId)) { new Error(player, "Invalid Display Slot ID was given. {E2}"); return } // displaySlotId is not vaslid. Handle error
+            if (!sortOrder) { new Error(player, "Invalid Sort Order was given. {E2}"); return } // sortOrder is not valid. Handle error
+            if (!displaySlotId) { new Error(player, "Invalid Display Slot ID was given. {E2}"); return } // displaySlotId is not vaslid. Handle error
 
             commands[args[1]].add(name, displaySlotId, sortOrder, player)
             break;

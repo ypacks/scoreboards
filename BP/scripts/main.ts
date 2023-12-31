@@ -15,6 +15,7 @@ const displaySlotIds = Object.values(DisplaySlotId)
 
 world.beforeEvents.chatSend.subscribe((eventData) => {
     const player = eventData.sender;
+    if (!player.isOp()) { new Error(player, `You {${player.name}} are not an OP. {E3}`); return }
     if (eventData.message[0] !== prefix) return;
     const command = eventData.message.slice(1) // removes ?
     //@ts-ignore
@@ -39,11 +40,11 @@ world.beforeEvents.chatSend.subscribe((eventData) => {
             if (!sortOrderValues.includes(sortOrder)) { new Error(player, "Invalid Sort Order was given. {E2}"); return } // sortOrder is not valid. Handle error
             if (!displaySlotIds.includes(displaySlotId)) { new Error(player, "Invalid Display Slot ID was given. {E2}"); return } // displaySlotId is not vaslid. Handle error
 
-            commands[args[1]].add(name, displaySlotId, sortOrder)
+            commands[args[1]].add(name, displaySlotId, sortOrder, player)
             break;
         case "remove":
         case "removescoreboard":
-            commands[args[1]].remove()
+            commands[args[1]].remove(player)
             break;
     }
 });

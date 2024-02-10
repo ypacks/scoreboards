@@ -6,7 +6,7 @@
 		],
 		"generated_with": {
 			"bridge": [
-				"2.7.8"
+				"2.7.11"
 			],
 			"dash": [
 				"github:bridge-core/dash-compiler#8fa35c73292f6382747d0f411fca26431a6d2c8e"
@@ -19,13 +19,13 @@
 		"min_engine_version": [
 			1,
 			20,
-			50
+			60
 		],
 		"uuid": "67db35c7-d02f-4b01-88ab-8ffa6fb387bc",
 		"version": [
 			1,
 			0,
-			0
+			1
 		]
 	},
 	"modules": [
@@ -53,7 +53,7 @@
 	"dependencies": [
 		{
 			"module_name": "@minecraft/server",
-			"version": "1.8.0-beta"
+			"version": "1.9.0-beta"
 		},
 		{
 			"module_name": "@minecraft/server-gametest",
@@ -61,7 +61,7 @@
 		},
 		{
 			"module_name": "@minecraft/server-ui",
-			"version": "1.2.0-beta"
+			"version": "1.8.0"
 		}
 	]
 }

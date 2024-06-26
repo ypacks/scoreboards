@@ -1,10 +1,17 @@
 {
     "categories": [
         {
-            "title": "Scoreboards",
+            "title": "Information",
             "pages": [
-                "sb/quick",
-                "sb/types"
+                "information/intro"
+            ]
+        },
+        {
+            "title": "Guides",
+            "pages": [
+                "guides/text",
+                "guides/images",
+                "guides/emoji"
             ]
         }
     ]

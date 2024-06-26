@@ -14,8 +14,8 @@
 		}
 	},
 	"header": {
-		"name": "§lScoreboards! §o§av1.3.0",
-		"description": "§lMore Scoreboards! §4Beta Apis in Experimental Features needs to be enabled for this to work!",
+		"name": "§lScoreboards! §o§av1.4.0",
+		"description": "§lMore Scoreboards! §4Beta Apis has to enabled in Experimental Features for this to work!",
 		"min_engine_version": [
 			1,
 			21,
@@ -24,7 +24,7 @@
 		"uuid": "67db35c7-d02f-4b01-88ab-8ffa6fb387bc",
 		"version": [
 			1,
-			3,
+			4,
 			0
 		]
 	},
@@ -53,7 +53,7 @@
 	"dependencies": [
 		{
 			"module_name": "@minecraft/server",
-			"version": "1.13.0-beta"
+			"version": "1.12.0-beta"
 		}
 	]
 }

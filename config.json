@@ -24,8 +24,8 @@
 	],
 	"compiler": {
 		"plugins": [
-			"generatorScripts",
 			"typeScript",
+			"generatorScripts",
 			"entityIdentifierAlias",
 			"customEntityComponents",
 			"customItemComponents",
